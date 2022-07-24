@@ -5,16 +5,18 @@ import time
 import numpy as np
 from io import StringIO
 from typing import List
+import os
 
 
 
 
 def run(input_values):
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome("./chromedriver", options=chrome_options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.get("http://climatemodels.uchicago.edu/isam/isam.html")
 
     # input_values = ["1", "2", "3", "4", "5", "6"]
